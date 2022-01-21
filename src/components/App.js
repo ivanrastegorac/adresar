@@ -4,19 +4,18 @@ import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Adresar from "./Adresar";
+import Kontakt from "./Kontakt";
 
 function App() {
   return (
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-       >
-        <div className="w-100" style={{ maxWidth: '400px' }}>
+      <Container>
+        <div className="w-auto" style={{ maxWidth: '5000px' }}>
           <Router>
           <AuthProvider>
               <Routes>
                 <Route path="/adresar" element={<Adresar/>} />
                 <Route path="/login" element={<Login/>} />
+                <Route path="/kontakt" element={<Kontakt/>}/>
               </Routes>
             </AuthProvider>  
           </Router>

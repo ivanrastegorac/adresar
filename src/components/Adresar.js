@@ -1,21 +1,44 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import { useAuth } from '../contexts/AuthContext';
+import {  Link } from "react-router-dom"
 
 export default function Adresar() {
-    function handleLogout(){
+  const navigate = useNavigate();
+  const [ error, setError ] = useState("");
+  const { logout } = useAuth();
 
+  async function handleLogout() {
+    setError('')
+
+    try {
+      await logout()
+      navigate('/login')
+    } catch {
+      setError('Failed to log out')
     }
+  }
 
   return (
-      <>
-      <Card>
-        <Card.Body>
-            <h2 className="text-center mb-4">Log In</h2>
-        </Card.Body>
-      </Card>
-        <div className="w-100 text-center mt-2">
-             <Button variant="link" onClick={handleLogout}>Log Out</Button>
-        </div>
-      </>
-  )
+    <>
+      <Navbar bg="light" variant="light" sticky="top">
+        <Container>
+          <Navbar.Brand as={Link} to={"/adresar"}>Adresar</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to={"/adresar"}>Početna</Nav.Link>
+              <Nav.Link as={Link} to={"/kontakt"}>Novi kontakt</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+          <div className="">
+            <Button variant="link" onClick={handleLogout}>
+              Odjavi se
+            </Button>
+          </div>
+        </Container>
+      </Navbar>
+    </>
+  );
 }
