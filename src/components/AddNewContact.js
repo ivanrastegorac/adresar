@@ -17,6 +17,7 @@ export default function Adresar() {
   const [error, setError] = useState('');
   const { logout } = useAuth();
   const { add } = useAuth();
+  const [name, setName] = useState('');
 
   async function handleLogout() {
     setError('');
@@ -31,6 +32,7 @@ export default function Adresar() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(name);
 
     try {
       await add();
@@ -74,6 +76,8 @@ export default function Adresar() {
                 type="text"
                 name="name"
                 placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </Form.Group>
@@ -84,6 +88,8 @@ export default function Adresar() {
                 type="text"
                 name="last name"
                 placeholder="Last name"
+                //value={lastName}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </Form.Group>
@@ -137,7 +143,7 @@ export default function Adresar() {
             <br />
           </Col>
           <Button
-            variant="primary"
+            variant="success"
             type="submit"
             className="btn btn-primary"
             onClick={handleSubmit}
