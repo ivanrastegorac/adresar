@@ -17,7 +17,7 @@ export default function Adresar() {
   const [error, setError] = useState('');
   const { logout } = useAuth();
   const { add } = useAuth();
-  const [name, setName] = useState('');
+  const [input, setInput] = useState('');
 
   async function handleLogout() {
     setError('');
@@ -32,14 +32,14 @@ export default function Adresar() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(name);
 
     try {
-      await add();
-      navigate('/');
+      setInput([input]);
+      navigate('/adresar');
     } catch {
       setError('Failed to add contact');
     }
+    console.log('Contact added!');
   }
 
   return (
@@ -76,8 +76,8 @@ export default function Adresar() {
                 type="text"
                 name="name"
                 placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                // value={input}
+                // onChange={(event) => setInput(event.target.value)}
                 required
               />
             </Form.Group>
@@ -88,8 +88,8 @@ export default function Adresar() {
                 type="text"
                 name="last name"
                 placeholder="Last name"
-                //value={lastName}
-                onChange={(e) => setName(e.target.value)}
+                // value={input}
+                // onChange={(event) => setInput(event.target.value)}
                 required
               />
             </Form.Group>
@@ -97,7 +97,7 @@ export default function Adresar() {
 
           <Form.Group className="mb-3" controlId="Calendar">
             <Form.Label>Date of birth:</Form.Label>
-            <Form.Control type="date" name="datum" />
+            <Form.Control type="date" name="dateOfBirth" />
           </Form.Group>
 
           <Col className="mb-3">
@@ -107,6 +107,8 @@ export default function Adresar() {
                 type="number"
                 name="mobile"
                 placeholder="Enter your mobile phone number"
+                // value={input}
+                // onChange={(event) => setInput(event.target.value)}
                 required
               />
             </Form.Group>
@@ -118,6 +120,8 @@ export default function Adresar() {
                 type="number"
                 name="phone"
                 placeholder="Enter your phone number"
+                // value={input}
+                // onChange={(event) => setInput(event.target.value)}
               />
             </Form.Group>
             <br />
@@ -128,6 +132,8 @@ export default function Adresar() {
                 type="email"
                 name="email"
                 placeholder="Enter your email adress"
+                // value={input}
+                // onChange={(event) => setInput(event.target.value)}
               />
             </Form.Group>
             <br />
@@ -138,6 +144,8 @@ export default function Adresar() {
                 type="number"
                 name="pager"
                 placeholder="Enter your pager number"
+                // value={input}
+                // onChange={(event) => setInput(event.target.value)}
               />
             </Form.Group>
             <br />

@@ -1,5 +1,6 @@
 import React from 'react';
 import Contact from './Contact';
+import { Table } from 'react-bootstrap';
 
 export const contacts = [
   {
@@ -43,9 +44,10 @@ export const contacts = [
 export default function ContactList() {
   return (
     <>
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
+            <th>#</th>
             <th>Name</th>
             <th>Last Name</th>
             <th>Mobile</th>
@@ -61,7 +63,7 @@ export default function ContactList() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </>
   );
 }
