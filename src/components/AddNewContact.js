@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Navbar,
   Container,
@@ -13,11 +13,46 @@ import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 export default function Adresar() {
+  // const nameInputRef = useRef();
+  // const lastNameInputRef = useRef();
+  // const dateOfBirthInputRef = useRef();
+  // const mobileInputRef = useRef();
+  // const phoneInputRef = useRef();
+  // const emailInputRef = useRef();
+  // const pagerInputRef = useRef();
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const { logout } = useAuth();
   const { add } = useAuth();
   const [input, setInput] = useState('');
+  // const [todos, setTodos] = useState([
+  //   'Take dogs for a walk',
+  //   'Take garbage out',
+  // ]);
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [pager, setPager] = useState('');
+
+  // const addContact = (event) => {
+  //   event.preventDefault();
+  //   //setTodos([...todos, input]);
+  //   const enteredName = nameInputRef.current.value;
+  //   const enteredLastName = lastNameInputRef.current.value;
+  //   const enteredDateOfBirth = dateOfBirthInputRef.current.value;
+  //   const enteredMobile = mobileInputRef.current.value;
+  //   const enteredPhone = phoneInputRef.current.value;
+  //   const enteredEmail = emailInputRef.current.value;
+  //   const enteredPager = pagerInputRef.current.value;
+  //   setInput('');
+  // };
+
+  // function addContact() {
+  //   return nameInputRef.current.value;
+  // }
 
   async function handleLogout() {
     setError('');
@@ -35,11 +70,10 @@ export default function Adresar() {
 
     try {
       setInput([input]);
-      navigate('/adresar');
+      navigate('/kontakt');
     } catch {
       setError('Failed to add contact');
     }
-    console.log('Contact added!');
   }
 
   return (
@@ -76,8 +110,9 @@ export default function Adresar() {
                 type="text"
                 name="name"
                 placeholder="Name"
-                // value={input}
-                // onChange={(event) => setInput(event.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                // ref={nameInputRef}
                 required
               />
             </Form.Group>
@@ -86,10 +121,11 @@ export default function Adresar() {
               <Form.Label>Last name:</Form.Label>
               <Form.Control
                 type="text"
-                name="last name"
+                name="lastName"
                 placeholder="Last name"
-                // value={input}
-                // onChange={(event) => setInput(event.target.value)}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                // ref={lastNameInputRef}
                 required
               />
             </Form.Group>
@@ -97,7 +133,13 @@ export default function Adresar() {
 
           <Form.Group className="mb-3" controlId="Calendar">
             <Form.Label>Date of birth:</Form.Label>
-            <Form.Control type="date" name="dateOfBirth" />
+            <Form.Control
+              type="date"
+              name="dateOfBirth"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+              // ref={dateOfBirthInputRef}
+            />
           </Form.Group>
 
           <Col className="mb-3">
@@ -107,8 +149,9 @@ export default function Adresar() {
                 type="number"
                 name="mobile"
                 placeholder="Enter your mobile phone number"
-                // value={input}
-                // onChange={(event) => setInput(event.target.value)}
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                // ref={mobileInputRef}
                 required
               />
             </Form.Group>
@@ -120,8 +163,9 @@ export default function Adresar() {
                 type="number"
                 name="phone"
                 placeholder="Enter your phone number"
-                // value={input}
-                // onChange={(event) => setInput(event.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                // ref={phoneInputRef}
               />
             </Form.Group>
             <br />
@@ -132,8 +176,9 @@ export default function Adresar() {
                 type="email"
                 name="email"
                 placeholder="Enter your email adress"
-                // value={input}
-                // onChange={(event) => setInput(event.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                // ref={emailInputRef}
               />
             </Form.Group>
             <br />
@@ -144,21 +189,33 @@ export default function Adresar() {
                 type="number"
                 name="pager"
                 placeholder="Enter your pager number"
-                // value={input}
-                // onChange={(event) => setInput(event.target.value)}
+                value={pager}
+                onChange={(e) => setPager(e.target.value)}
+                // ref={pagerInputRef}
               />
             </Form.Group>
             <br />
           </Col>
           <Button
+            //disabled={!input}
             variant="success"
             type="submit"
             className="btn btn-primary"
-            onClick={handleSubmit}
+            //  onClick={addContact}
           >
             Add contact
           </Button>
         </Form>
+        <ul>
+          <li>
+            Name: {name} {lastName}
+          </li>
+          <li>Date of Birth: {dateOfBirth}</li>
+          <li>Mobile: {mobile}</li>
+          <li>Phone: {phone}</li>
+          <li>Email: {email}</li>
+          <li>Pager: {pager}</li>
+        </ul>
       </div>
     </>
   );

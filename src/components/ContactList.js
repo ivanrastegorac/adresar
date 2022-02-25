@@ -1,6 +1,8 @@
 import React from 'react';
 import Contact from './Contact';
 import { Table } from 'react-bootstrap';
+import AddNewContact from './AddNewContact';
+import addContact from './AddNewContact';
 
 export const contacts = [
   {
@@ -36,7 +38,7 @@ export const contacts = [
     lastName: 'Tonić',
     mobile: '099498578',
     phone: '',
-    email: 'tonaBandera@gmail.com',
+    email: 'tonka@gmail.com',
     pager: '',
   },
 ];

@@ -25,7 +25,7 @@ export default function Login() {
 
   //   //   setNewUser({...newUser, [email]: value});
   //   // }
-  
+
   //   // }
   // }
 
@@ -45,7 +45,7 @@ export default function Login() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       navigate('/adresar');
-    } catch (err){
+    } catch (err) {
       console.log(err);
       setError('Failed to Log In');
     }
@@ -68,14 +68,24 @@ export default function Login() {
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control type="email" name="email" ref={emailRef} required />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  ref={emailRef}
+                  required
+                />
               </Form.Group>
               <br />
               <Form.Group id="password">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" name="password" ref={passwordRef} required/>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  ref={passwordRef}
+                  required
+                />
               </Form.Group>
-              <br/>
+              <br />
 
               {/* <ul className="mb-4">
                 <li className={passwordError.isLenthy ? "text-succes" : "text-danger"}>Najmanje 6 znakova</li>
