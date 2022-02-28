@@ -1,49 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Contact from './Contact';
 import { Table } from 'react-bootstrap';
-import AddNewContact from './AddNewContact';
-import addContact from './AddNewContact';
-
-export const contacts = [
-  {
-    id: 1,
-    name: 'Tom',
-    lastName: 'Hardy',
-    mobile: '0915464578',
-    phone: '12',
-    email: 'tomica@gmail.com',
-    pager: '322',
-  },
-  {
-    id: 2,
-    name: 'Pero',
-    lastName: 'Perić',
-    mobile: '09154634438',
-    phone: '231',
-    email: 'perica@gmail.com',
-    pager: '123456789',
-  },
-  {
-    id: 3,
-    name: 'Maja',
-    lastName: 'Majić',
-    mobile: '0981264578',
-    phone: '98765433',
-    email: 'maja@gmail.com',
-    pager: '',
-  },
-  {
-    id: 4,
-    name: 'Tonka',
-    lastName: 'Tonić',
-    mobile: '099498578',
-    phone: '',
-    email: 'tonka@gmail.com',
-    pager: '',
-  },
-];
+import data from '../mock-data.json';
 
 export default function ContactList() {
+  const [contacts, setContacts] = useState(data);
+
   return (
     <>
       <Table striped bordered hover>
@@ -56,6 +18,7 @@ export default function ContactList() {
             <th>Phone</th>
             <th>Email</th>
             <th>Pager</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

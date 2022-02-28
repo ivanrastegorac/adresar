@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   Navbar,
   Container,
@@ -11,48 +11,56 @@ import {
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import { nanoid } from 'nanoid';
+import data from '../mock-data.json';
 
 export default function Adresar() {
-  // const nameInputRef = useRef();
-  // const lastNameInputRef = useRef();
-  // const dateOfBirthInputRef = useRef();
-  // const mobileInputRef = useRef();
-  // const phoneInputRef = useRef();
-  // const emailInputRef = useRef();
-  // const pagerInputRef = useRef();
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const { logout } = useAuth();
-  const { add } = useAuth();
-  const [input, setInput] = useState('');
-  // const [todos, setTodos] = useState([
-  //   'Take dogs for a walk',
-  //   'Take garbage out',
-  // ]);
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [pager, setPager] = useState('');
+  //const { add } = useAuth();
+  //const [input, setInput] = useState('');
+  const [contacts, setContacts] = useState(data);
+  const [addFormData, setAddFormData] = useState({
+    name: '',
+    lastName: '',
+    dateOfBirth: '',
+    mobile: '',
+    phone: '',
+    email: '',
+    pager: '',
+  });
 
-  // const addContact = (event) => {
-  //   event.preventDefault();
-  //   //setTodos([...todos, input]);
-  //   const enteredName = nameInputRef.current.value;
-  //   const enteredLastName = lastNameInputRef.current.value;
-  //   const enteredDateOfBirth = dateOfBirthInputRef.current.value;
-  //   const enteredMobile = mobileInputRef.current.value;
-  //   const enteredPhone = phoneInputRef.current.value;
-  //   const enteredEmail = emailInputRef.current.value;
-  //   const enteredPager = pagerInputRef.current.value;
-  //   setInput('');
-  // };
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
 
-  // function addContact() {
-  //   return nameInputRef.current.value;
-  // }
+    const fieldName = event.target.getAttribute('name');
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setAddFormData(newFormData);
+  };
+
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newContact = {
+      id: nanoid(),
+      name: addFormData.name,
+      lastName: addFormData.lastName,
+      dateOfBirth: addFormData.dateOfBirth,
+      mobile: addFormData.mobile,
+      phone: addFormData.phone,
+      email: addFormData.email,
+      pager: addFormData.pager,
+    };
+    console.log(newContact);
+
+    const newContacts = [...contacts, newContact];
+    setContacts(newContacts);
+  };
 
   async function handleLogout() {
     setError('');
@@ -65,16 +73,16 @@ export default function Adresar() {
     }
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
 
-    try {
-      setInput([input]);
-      navigate('/kontakt');
-    } catch {
-      setError('Failed to add contact');
-    }
-  }
+  //   try {
+  //     setInput([input]);
+  //     navigate('/kontakt');
+  //   } catch {
+  //     setError('Failed to add contact');
+  //   }
+  // }
 
   return (
     <>
@@ -102,7 +110,7 @@ export default function Adresar() {
         </Container>
       </Navbar>
       <div>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleAddFormSubmit}>
           <Row className="mb-3">
             <Form.Group as={Col}>
               <Form.Label>Name:</Form.Label>
@@ -110,9 +118,7 @@ export default function Adresar() {
                 type="text"
                 name="name"
                 placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                // ref={nameInputRef}
+                onChange={handleAddFormChange}
                 required
               />
             </Form.Group>
@@ -123,9 +129,7 @@ export default function Adresar() {
                 type="text"
                 name="lastName"
                 placeholder="Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                // ref={lastNameInputRef}
+                onChange={handleAddFormChange}
                 required
               />
             </Form.Group>
@@ -136,9 +140,7 @@ export default function Adresar() {
             <Form.Control
               type="date"
               name="dateOfBirth"
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
-              // ref={dateOfBirthInputRef}
+              onChange={handleAddFormChange}
             />
           </Form.Group>
 
@@ -149,9 +151,7 @@ export default function Adresar() {
                 type="number"
                 name="mobile"
                 placeholder="Enter your mobile phone number"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                // ref={mobileInputRef}
+                onChange={handleAddFormChange}
                 required
               />
             </Form.Group>
@@ -163,9 +163,7 @@ export default function Adresar() {
                 type="number"
                 name="phone"
                 placeholder="Enter your phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                // ref={phoneInputRef}
+                onChange={handleAddFormChange}
               />
             </Form.Group>
             <br />
@@ -176,9 +174,7 @@ export default function Adresar() {
                 type="email"
                 name="email"
                 placeholder="Enter your email adress"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                // ref={emailInputRef}
+                onChange={handleAddFormChange}
               />
             </Form.Group>
             <br />
@@ -189,9 +185,7 @@ export default function Adresar() {
                 type="number"
                 name="pager"
                 placeholder="Enter your pager number"
-                value={pager}
-                onChange={(e) => setPager(e.target.value)}
-                // ref={pagerInputRef}
+                onChange={handleAddFormChange}
               />
             </Form.Group>
             <br />
@@ -201,21 +195,11 @@ export default function Adresar() {
             variant="success"
             type="submit"
             className="btn btn-primary"
-            //  onClick={addContact}
+            onClick={handleAddFormSubmit}
           >
             Add contact
           </Button>
         </Form>
-        <ul>
-          <li>
-            Name: {name} {lastName}
-          </li>
-          <li>Date of Birth: {dateOfBirth}</li>
-          <li>Mobile: {mobile}</li>
-          <li>Phone: {phone}</li>
-          <li>Email: {email}</li>
-          <li>Pager: {pager}</li>
-        </ul>
       </div>
     </>
   );
