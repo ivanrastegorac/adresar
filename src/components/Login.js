@@ -44,7 +44,7 @@ export default function Login() {
       setError('');
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate('/adresar');
+      navigate('/home');
     } catch (err) {
       console.log(err);
       setError('Failed to Log In');

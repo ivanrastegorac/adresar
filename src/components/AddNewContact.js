@@ -1,20 +1,82 @@
 import React, { useState } from 'react';
-import {
-  Navbar,
-  Container,
-  Nav,
-  Button,
-  Form,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
-import { Link } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import data from '../mock-data.json';
+import Heading from './Navbar';
 
-export default function Adresar() {
+// export default function Adresar() {
+//   const navigate = useNavigate();
+//   const [error, setError] = useState('');
+//   const { logout } = useAuth();
+//   //const { add } = useAuth();
+//   //const [input, setInput] = useState('');
+//   const [contacts, setContacts] = useState(data);
+//   const [addFormData, setAddFormData] = useState({
+//     name: '',
+//     lastName: '',
+//     dateOfBirth: '',
+//     mobile: '',
+//     phone: '',
+//     email: '',
+//     pager: '',
+//   });
+
+//   const handleAddFormChange = (event) => {
+//     event.preventDefault();
+
+//     const fieldName = event.target.getAttribute('name');
+//     const fieldValue = event.target.value;
+
+//     const newFormData = { ...addFormData };
+//     newFormData[fieldName] = fieldValue;
+
+//     setAddFormData(newFormData);
+//   };
+
+//   const handleAddFormSubmit = (event) => {
+//     event.preventDefault();
+
+//     const newContact = {
+//       id: nanoid(),
+//       name: addFormData.name,
+//       lastName: addFormData.lastName,
+//       dateOfBirth: addFormData.dateOfBirth,
+//       mobile: addFormData.mobile,
+//       phone: addFormData.phone,
+//       email: addFormData.email,
+//       pager: addFormData.pager,
+//     };
+//     console.log(newContact);
+
+//     const newContacts = [...contacts, newContact];
+//     setContacts(newContacts);
+//   };
+
+//   async function handleLogout() {
+//     setError('');
+
+//     try {
+//       await logout();
+//       navigate('/');
+//     } catch {
+//       setError('Failed to log out');
+//     }
+//   }
+
+//   // async function handleSubmit(e) {
+//   //   e.preventDefault();
+
+//   //   try {
+//   //     setInput([input]);
+//   //     navigate('/kontakt');
+//   //   } catch {
+//   //     setError('Failed to add contact');
+//   //   }
+//   // }
+
+const Adresar = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const { logout } = useAuth();
@@ -86,29 +148,7 @@ export default function Adresar() {
 
   return (
     <>
-      <Navbar bg="light" variant="light" sticky="top">
-        <Container>
-          <Navbar.Brand as={Link} to={'/adresar'}>
-            Adresar AG04
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to={'/adresar'}>
-                Home
-              </Nav.Link>
-              <Nav.Link as={Link} to={'/kontakt'}>
-                Add new contact
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-          <div className="">
-            <Button variant="link" onClick={handleLogout}>
-              Sign out
-            </Button>
-          </div>
-        </Container>
-      </Navbar>
+      <Heading />
       <div>
         <Form onSubmit={handleAddFormSubmit}>
           <Row className="mb-3">
@@ -195,7 +235,6 @@ export default function Adresar() {
             variant="success"
             type="submit"
             className="btn btn-primary"
-            onClick={handleAddFormSubmit}
           >
             Add contact
           </Button>
@@ -203,4 +242,6 @@ export default function Adresar() {
       </div>
     </>
   );
-}
+};
+
+export default Adresar;
