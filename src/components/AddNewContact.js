@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Row, Col, Accordion, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { nanoid } from 'nanoid';
@@ -76,13 +76,13 @@ import Heading from './Navbar';
 //   //   }
 //   // }
 
-const Adresar = () => {
+const Adresar = ({ contacts, onSetContacts }) => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const { logout } = useAuth();
   //const { add } = useAuth();
   //const [input, setInput] = useState('');
-  const [contacts, setContacts] = useState(data);
+  //const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
     name: '',
     lastName: '',
@@ -107,6 +107,7 @@ const Adresar = () => {
 
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
+    navigate('/adresar');
 
     const newContact = {
       id: nanoid(),
@@ -121,7 +122,7 @@ const Adresar = () => {
     console.log(newContact);
 
     const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
+    onSetContacts(newContacts);
   };
 
   async function handleLogout() {
@@ -184,58 +185,62 @@ const Adresar = () => {
             />
           </Form.Group>
 
-          <Col className="mb-3">
-            <Form.Group>
-              <Form.Label>Mobile:</Form.Label>
-              <Form.Control
-                type="number"
-                name="mobile"
-                placeholder="Enter your mobile phone number"
-                onChange={handleAddFormChange}
-                required
-              />
-            </Form.Group>
-            <br />
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Contact</Accordion.Header>
+              <Accordion.Body>
+                <Col className="mb-3">
+                  <Form.Group>
+                    <Form.Label>Mobile:</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="mobile"
+                      placeholder="Enter your mobile phone number"
+                      onChange={handleAddFormChange}
+                      required
+                    />
+                  </Form.Group>
+                  <br />
 
-            <Form.Group>
-              <Form.Label>Phone:</Form.Label>
-              <Form.Control
-                type="number"
-                name="phone"
-                placeholder="Enter your phone number"
-                onChange={handleAddFormChange}
-              />
-            </Form.Group>
-            <br />
+                  <Form.Group>
+                    <Form.Label>Phone:</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="phone"
+                      placeholder="Enter your phone number"
+                      onChange={handleAddFormChange}
+                    />
+                  </Form.Group>
+                  <br />
 
-            <Form.Group>
-              <Form.Label>Email:</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="Enter your email adress"
-                onChange={handleAddFormChange}
-              />
-            </Form.Group>
-            <br />
+                  <Form.Group>
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email adress"
+                      onChange={handleAddFormChange}
+                    />
+                  </Form.Group>
+                  <br />
 
-            <Form.Group>
-              <Form.Label>Pager:</Form.Label>
-              <Form.Control
-                type="number"
-                name="pager"
-                placeholder="Enter your pager number"
-                onChange={handleAddFormChange}
-              />
-            </Form.Group>
-            <br />
-          </Col>
-          <Button
-            //disabled={!input}
-            variant="success"
-            type="submit"
-            className="btn btn-primary"
-          >
+                  <Form.Group>
+                    <Form.Label>Pager:</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="pager"
+                      placeholder="Enter your pager number"
+                      onChange={handleAddFormChange}
+                    />
+                  </Form.Group>
+                  <br />
+                </Col>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <br />
+
+          <Button variant="success" type="submit" className="btn btn-primary">
             Add contact
           </Button>
         </Form>
