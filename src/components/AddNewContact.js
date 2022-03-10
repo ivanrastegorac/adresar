@@ -105,9 +105,29 @@ const Adresar = ({ contacts, onSetContacts }) => {
     setAddFormData(newFormData);
   };
 
-  const handleAddFormSubmit = (event) => {
+  // const handleAddFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   navigate('/adresar');
+
+  async function handleAddFormSubmit(event) {
     event.preventDefault();
     navigate('/adresar');
+
+    const response = await fetch(
+      'https://adresarag04-default-rtdb.europe-west1.firebasedatabase.app/contacts.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(contacts),
+      }
+    );
+
+    const data = await response.stringify.json();
+    console.log(data);
+
+    // db.collection('contacts').add({
+    //   contacts,
+    //   onSetContacts,
+    // });
 
     const newContact = {
       id: nanoid(),
@@ -123,7 +143,7 @@ const Adresar = ({ contacts, onSetContacts }) => {
 
     const newContacts = [...contacts, newContact];
     onSetContacts(newContacts);
-  };
+  }
 
   async function handleLogout() {
     setError('');
