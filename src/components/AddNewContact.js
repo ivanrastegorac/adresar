@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Row, Col, Accordion, Alert } from 'react-bootstrap';
+import { Button, Form, Row, Col, Accordion } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { nanoid } from 'nanoid';
@@ -10,49 +10,6 @@ import Heading from './Navbar';
 //   const navigate = useNavigate();
 //   const [error, setError] = useState('');
 //   const { logout } = useAuth();
-//   //const { add } = useAuth();
-//   //const [input, setInput] = useState('');
-//   const [contacts, setContacts] = useState(data);
-//   const [addFormData, setAddFormData] = useState({
-//     name: '',
-//     lastName: '',
-//     dateOfBirth: '',
-//     mobile: '',
-//     phone: '',
-//     email: '',
-//     pager: '',
-//   });
-
-//   const handleAddFormChange = (event) => {
-//     event.preventDefault();
-
-//     const fieldName = event.target.getAttribute('name');
-//     const fieldValue = event.target.value;
-
-//     const newFormData = { ...addFormData };
-//     newFormData[fieldName] = fieldValue;
-
-//     setAddFormData(newFormData);
-//   };
-
-//   const handleAddFormSubmit = (event) => {
-//     event.preventDefault();
-
-//     const newContact = {
-//       id: nanoid(),
-//       name: addFormData.name,
-//       lastName: addFormData.lastName,
-//       dateOfBirth: addFormData.dateOfBirth,
-//       mobile: addFormData.mobile,
-//       phone: addFormData.phone,
-//       email: addFormData.email,
-//       pager: addFormData.pager,
-//     };
-//     console.log(newContact);
-
-//     const newContacts = [...contacts, newContact];
-//     setContacts(newContacts);
-//   };
 
 //   async function handleLogout() {
 //     setError('');
@@ -65,24 +22,10 @@ import Heading from './Navbar';
 //     }
 //   }
 
-//   // async function handleSubmit(e) {
-//   //   e.preventDefault();
-
-//   //   try {
-//   //     setInput([input]);
-//   //     navigate('/kontakt');
-//   //   } catch {
-//   //     setError('Failed to add contact');
-//   //   }
-//   // }
-
 const Adresar = ({ contacts, onSetContacts }) => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const { logout } = useAuth();
-  //const { add } = useAuth();
-  //const [input, setInput] = useState('');
-  //const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
     name: '',
     lastName: '',
@@ -113,22 +56,6 @@ const Adresar = ({ contacts, onSetContacts }) => {
     event.preventDefault();
     navigate('/adresar');
 
-    const response = await fetch(
-      'https://adresarag04-default-rtdb.europe-west1.firebasedatabase.app/contacts.json',
-      {
-        method: 'POST',
-        body: JSON.stringify(contacts),
-      }
-    );
-
-    const data = await response.stringify.json();
-    console.log(data);
-
-    // db.collection('contacts').add({
-    //   contacts,
-    //   onSetContacts,
-    // });
-
     const newContact = {
       id: nanoid(),
       name: addFormData.name,
@@ -141,8 +68,21 @@ const Adresar = ({ contacts, onSetContacts }) => {
     };
     console.log(newContact);
 
-    const newContacts = [...contacts, newContact];
+    const newContacts = [...contacts, newContact].sort((a, b) =>
+      a.lastName.toLowerCase() > b.lastName.toLowerCase() ? 1 : -1
+    );
     onSetContacts(newContacts);
+
+    const response = await fetch(
+      'https://adresarag04-default-rtdb.europe-west1.firebasedatabase.app/newContacts.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(newContacts),
+      }
+    );
+
+    const data = await response.stringify.json();
+    console.log(data);
   }
 
   async function handleLogout() {
@@ -155,17 +95,6 @@ const Adresar = ({ contacts, onSetContacts }) => {
       setError('Failed to log out');
     }
   }
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   try {
-  //     setInput([input]);
-  //     navigate('/kontakt');
-  //   } catch {
-  //     setError('Failed to add contact');
-  //   }
-  // }
 
   return (
     <>
