@@ -11,16 +11,16 @@ import Heading from './Navbar';
 //   const [error, setError] = useState('');
 //   const { logout } = useAuth();
 
-//   async function handleLogout() {
-//     setError('');
+// async function handleLogout() {
+//   setError('');
 
-//     try {
-//       await logout();
-//       navigate('/');
-//     } catch {
-//       setError('Failed to log out');
-//     }
+//   try {
+//     await logout();
+//     navigate('/');
+//   } catch {
+//     setError('Failed to log out');
 //   }
+// }
 
 const Adresar = ({ contacts, onSetContacts }) => {
   const navigate = useNavigate();
@@ -74,15 +74,14 @@ const Adresar = ({ contacts, onSetContacts }) => {
     onSetContacts(newContacts);
 
     const response = await fetch(
-      'https://adresarag04-default-rtdb.europe-west1.firebasedatabase.app/newContacts.json',
+      'https://adresarag04-default-rtdb.europe-west1.firebasedatabase.app/contacts.json',
       {
         method: 'POST',
-        body: JSON.stringify(newContacts),
+        body: JSON.stringify(newContact),
       }
     );
 
     const data = await response.stringify.json();
-    console.log(data);
   }
 
   async function handleLogout() {
@@ -99,6 +98,7 @@ const Adresar = ({ contacts, onSetContacts }) => {
   return (
     <>
       <Heading />
+      <br />
       <div>
         <Form onSubmit={handleAddFormSubmit}>
           <Row className="mb-3">

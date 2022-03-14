@@ -1,6 +1,6 @@
 import React from 'react';
 import Contact from './Contact';
-import { Table } from 'react-bootstrap';
+import { Table, Card } from 'react-bootstrap';
 import Heading from './Navbar';
 
 const ContactList = ({ contacts }) => {
@@ -10,16 +10,23 @@ const ContactList = ({ contacts }) => {
     <>
       <Heading />
       <br />
+      <div>
+        <Card body>
+          <Card.Title>Adress Book</Card.Title>
+        </Card>
+      </div>
+      <br />
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Last Name</th>
+            <th>Contact</th>
+            {/* <th>Last Name</th> */}
+            {/* <th>Date of birth</th> */}
             <th>Mobile</th>
-            <th>Phone</th>
+            {/* <th>Phone</th>
             <th>Email</th>
-            <th>Pager</th>
-            <th>Actions</th>
+            <th>Pager</th> */}
+            <th>Options</th>
           </tr>
         </thead>
         <tbody>
