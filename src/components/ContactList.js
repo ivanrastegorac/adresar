@@ -13,6 +13,7 @@ const ContactList = ({ contacts }) => {
       <div>
         <Card body>
           <Card.Title>Adress Book</Card.Title>
+          <input type="text" placeholder="Search" />
         </Card>
       </div>
       <br />
@@ -30,9 +31,9 @@ const ContactList = ({ contacts }) => {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact) => (
-            <tr key={contact.id}>
-              <Contact contact={contact} />
+          {contacts.map((contacts) => (
+            <tr key={contacts.id}>
+              <Contact contact={contacts} />
             </tr>
           ))}
         </tbody>
