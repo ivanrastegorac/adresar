@@ -4,7 +4,7 @@ import { Table, Card } from 'react-bootstrap';
 import Heading from './Navbar';
 
 const ContactList = ({ contacts }) => {
-  // const [contacts, setContacts] = useState(data);
+  //const [contacts, setContacts] = useState(data);
 
   return (
     <>
@@ -31,9 +31,9 @@ const ContactList = ({ contacts }) => {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contacts) => (
-            <tr key={contacts.id}>
-              <Contact contact={contacts} />
+          {contacts.map((contact) => (
+            <tr key={contact.id}>
+              <Contact contact={contact} />
             </tr>
           ))}
         </tbody>

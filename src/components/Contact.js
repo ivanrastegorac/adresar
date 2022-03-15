@@ -1,3 +1,6 @@
+import { Button } from 'react-bootstrap';
+import { BsPencilSquare, BsTrash, BsStar } from 'react-icons/bs';
+
 export default function Contact({ contact }) {
   return (
     <>
@@ -10,6 +13,15 @@ export default function Contact({ contact }) {
       {/* <td>{contact.phone}</td>
       <td>{contact.email}</td>
       <td>{contact.pager}</td> */}
+      <td>
+        <Button size="sm">View Contact</Button>
+
+        <BsStar size="25px" />
+
+        <BsPencilSquare size="25px" color="green" />
+
+        <BsTrash size="25px" color="red" />
+      </td>
     </>
   );
 }

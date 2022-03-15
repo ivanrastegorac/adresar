@@ -7,9 +7,7 @@ import data from '../mock-data.json';
 import Heading from './Navbar';
 
 // export default function Adresar() {
-//   const navigate = useNavigate();
 //   const [error, setError] = useState('');
-//   const { logout } = useAuth();
 
 // async function handleLogout() {
 //   setError('');
@@ -84,16 +82,16 @@ const Adresar = ({ contacts, onSetContacts }) => {
     const data = await response.stringify.json();
   }
 
-  async function handleLogout() {
-    setError('');
+  // async function handleLogout() {
+  //   setError('');
 
-    try {
-      await logout();
-      navigate('/');
-    } catch {
-      setError('Failed to log out');
-    }
-  }
+  //   try {
+  //     await logout();
+  //     navigate('/');
+  //   } catch {
+  //     setError('Failed to log out');
+  //   }
+  // }
 
   return (
     <>
@@ -125,32 +123,32 @@ const Adresar = ({ contacts, onSetContacts }) => {
             </Form.Group>
           </Row>
 
-          <Form.Group className="mb-3" controlId="Calendar">
-            <Form.Label>Date of birth:</Form.Label>
+          <Form.Group>
+            <Form.Label>Mobile:</Form.Label>
             <Form.Control
-              type="date"
-              name="dateOfBirth"
+              type="number"
+              name="mobile"
+              placeholder="Enter your mobile phone number"
               onChange={handleAddFormChange}
+              required
             />
           </Form.Group>
+          <br />
 
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Contact</Accordion.Header>
               <Accordion.Body>
                 <Col className="mb-3">
-                  <Form.Group>
-                    <Form.Label>Mobile:</Form.Label>
+                  <Form.Group className="mb-3" controlId="Calendar">
+                    <Form.Label>Date of birth:</Form.Label>
                     <Form.Control
-                      type="number"
-                      name="mobile"
-                      placeholder="Enter your mobile phone number"
+                      type="date"
+                      name="dateOfBirth"
                       onChange={handleAddFormChange}
-                      required
                     />
                   </Form.Group>
                   <br />
-
                   <Form.Group>
                     <Form.Label>Phone:</Form.Label>
                     <Form.Control
