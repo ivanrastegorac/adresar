@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Login from './Login';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -10,7 +10,21 @@ import Home from './Home';
 import data from '../mock-data.json';
 
 function App() {
+  const LOCAL_STORAGE_KEY = 'contacts';
   const [contacts, setContacts] = useState(data);
+
+  // const addContactHandler = (newContact) => {
+  //   setContacts([...contacts, newContact]);
+  // };
+
+  useEffect(() => {
+    const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (retriveContacts) setContacts(retriveContacts);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+  }, [contacts]);
 
   return (
     <Container>

@@ -1,19 +1,16 @@
 import { Button } from 'react-bootstrap';
 import { BsPencilSquare, BsTrash, BsStar } from 'react-icons/bs';
+// import user from '../images/user.png';
 
-export default function Contact({ contact }) {
+const Contact = ({ contact }) => {
   return (
     <>
-      <td>
+      <td className="text-center">
+        {/* <img src={user} alt="contact" size="2px" /> */}
         {contact.name} {contact.lastName}
       </td>
-      {/* <td>{contact.lastName}</td> */}
-      {/* <td>{contact.dateOfBirth}</td> */}
-      <td>{contact.mobile}</td>
-      {/* <td>{contact.phone}</td>
-      <td>{contact.email}</td>
-      <td>{contact.pager}</td> */}
-      <td>
+      <td className="text-center">{contact.mobile}</td>
+      <td className="text-center">
         <Button size="sm">View Contact</Button>
 
         <BsStar size="25px" />
@@ -24,4 +21,6 @@ export default function Contact({ contact }) {
       </td>
     </>
   );
-}
+};
+
+export default Contact;

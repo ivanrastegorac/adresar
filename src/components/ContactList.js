@@ -20,14 +20,14 @@ const ContactList = ({ contacts }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Contact</th>
+            <th className="text-center">Contact</th>
             {/* <th>Last Name</th> */}
             {/* <th>Date of birth</th> */}
-            <th>Mobile</th>
+            <th className="text-center">Mobile</th>
             {/* <th>Phone</th>
             <th>Email</th>
             <th>Pager</th> */}
-            <th>Options</th>
+            <th className="text-center">Options</th>
           </tr>
         </thead>
         <tbody>
