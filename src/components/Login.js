@@ -100,6 +100,8 @@ export default function Login() {
                 Log In
               </Button>
             </Form>
+            <br />
+            <Form>Powered by Ivan Raštegorac</Form>
           </Card.Body>
         </Card>
       </Container>

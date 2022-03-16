@@ -8,6 +8,7 @@ import Favorites from './Favorites';
 import ContactList from './ContactList';
 import Home from './Home';
 import data from '../mock-data.json';
+import ContactDetails from './ContactDetails';
 
 function App() {
   const LOCAL_STORAGE_KEY = 'contacts';
@@ -48,6 +49,7 @@ function App() {
                 path="/adresar"
                 element={<ContactList contacts={contacts} />}
               />
+              <Route path="/contact-details" element={<ContactDetails />} />
             </Routes>
           </AuthProvider>
         </Router>
